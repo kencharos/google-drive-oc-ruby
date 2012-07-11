@@ -25,8 +25,7 @@ configure do
 # App identity
   set :credentials, Google::APIClient::ClientSecrets.load
   set :app_id, settings.credentials.client_id.sub(/[.-].*/,'')
-
-  DataMapper.setup(:default, "sqlite::memory:")
+  DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite::memory:")
   User.auto_migrate!
   User.destroy
 
@@ -43,9 +42,9 @@ helpers do
   def api_client
     @client ||= (begin
     client = Google::APIClient.new
-    client.authorization.client_id = settings.credentials.client_id
-    client.authorization.client_secret = settings.credentials.client_secret
-    client.authorization.redirect_uri = settings.credentials.redirect_uris.first
+    client.authorization.client_id = ENV['CLIENT_ID'] || settings.credentials.client_id
+    client.authorization.client_secret = ENV['CLIENT_SECRET'] ||  settings.credentials.client_secret
+    client.authorization.redirect_uri = ENV['REDIRECT_URI'] || settings.credentials.redirect_uris.first
     client.authorization.scope = SCOPES
     client
     end)
