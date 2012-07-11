@@ -1,1 +1,10 @@
 Trying Goodle Drive's OCR
+
+local set up
+1. register Google account. Then sign up google Drive
+2. access Google API console (https://code.google.com/apis/console)
+   And publish google drive api's OAuth client ID & secret
+3. update client_secrets.json about client ID & secret
+4. bundle install
+5. foreman start
+6. access http://localhost:5000 

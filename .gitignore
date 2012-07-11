@@ -2,3 +2,6 @@
 .project
 private_memo.txt
 
+client_secrets.json.example
+client_secrets.json.private
+mapper.rb

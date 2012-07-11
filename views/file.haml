@@ -1,0 +1,27 @@
+!!! 5
+
+%html
+  %head
+    %title Trying Google Drive OCR
+    %script{:type => "text/javascript", :src =>"http://code.jquery.com/jquery-1.7.2.min.js"}
+    %script{:type => "text/javascript", :src =>"js/main.js"}
+    :javascript
+      (function () {
+       window.addEventListener("load", function(){
+        $("#tmp").change(function(e){ 
+              var file = e.target.files[0];
+              readFile(file);
+          });
+         },false)
+      })()
+  %body
+    %h1 Welcome #{current_user.email}
+    %h2 select your image files 
+    %form{:action => '/file', :method => 'POST'}
+      %input{:id=>'tmp',:type => 'file', :name => 'file'}
+    %table{:width =>"1000px"}
+      %tr
+        %td{:width =>"500px"}
+          %span{:id => "img"} image
+        %td{:width =>"500px"}
+          %span{:id => "text"} text
